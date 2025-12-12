@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    background-color: #FFFFFF;
+    color: #111827;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  }
+  .bg-white {
+    color: #111827;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: #6B7280;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background-color: #FFFFFF;
+    @apply shadow-xl;
+    border: 1px solid #E5E7EB;
+  }
+  .skeleton {
+    background-image: linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+    background-size: 700px 100%;
+  }
+}
+
+/* Responsive refinements for small screens without changing component logic */
+@layer base {
+  /* Prevent global horizontal overflow while preserving inner scroll areas */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Notifications dropdown width adapts to viewport */
+  #notification-container {
+    width: min(520px, calc(100vw - 2rem));
+    max-width: calc(100vw - 2rem);
+  }
+
+  /* Top-right toast width adapts on very small screens */
+  @media (max-width: 480px) {
+    div[class*="z-[9999]"][class*="w-[380px]"] {
+      width: calc(100vw - 1rem);
+      right: 0.5rem;
+      left: 0.5rem;
+    }
+  }
+
+  /* Header bar wraps items neatly on small screens */
+  @media (max-width: 640px) {
+    header > div {
+      flex-wrap: wrap;
+      row-gap: 0.5rem;
+    }
+  }
+
+  /* Make tab row horizontally scrollable on small screens */
+  @media (max-width: 640px) {
+    .max-w-7xl > .flex {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      padding-bottom: 8px;
+      gap: 0.75rem;
+    }
+    .max-w-7xl > .flex::-webkit-scrollbar { display: none; }
+    .max-w-7xl > .flex > button {
+      white-space: nowrap;
+    }
+    /* Head Admin notifications panel: fit viewport on mobile */
+    #notification-container {
+      width: calc(100vw - 1rem);
+      max-width: calc(100vw - 1rem);
+    }
+    /* Archive toolbar: avoid horizontal overflow */
+    .archive-toolbar { flex-wrap: wrap; }
+  }
+
+  /* Compact table cell padding for narrow devices */
+  @media (max-width: 480px) {
+    table th,
+    table td {
+      padding-left: 0.75rem !important;
+      padding-right: 0.75rem !important;
+    }
+  }
+
+  /* Hide the decorative sliding panel on auth screens for mobile */
+  @media (max-width: 768px) {
+    /* Notifications dropdown: anchor to right, fit viewport, enable horizontal scroll */
+    .fixed:has(> #notification-container) {
+      right: 0.5rem !important;
+      left: auto !important;
+    }
+    #notification-container {
+      width: calc(100vw - 1rem);
+      max-width: calc(100vw - 1rem);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .grid + .absolute {
+      display: none;
+    }
+  }
+}
