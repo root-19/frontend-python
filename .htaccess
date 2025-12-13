@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # ----------------------------------------------------
+  # 1. REACT/VITE SPA ROUTING FIX
+  # ----------------------------------------------------
+  
+  # Kung ang request ay para sa index.html, hayaan lang
+  RewriteRule ^index\.html$ - [L]
+
+  # Kung ang request ay HINDI tumutugma sa isang umiiral na file (-f)
+  # at HINDI tumutugma sa isang umiiral na directory (-d),
+  # I-redirect ang lahat ng requests sa index.html. Ito ang nagpapagana sa React Router.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+
+  # ----------------------------------------------------
+  # 2. OPTIONAL: MIME TYPE FIX (KUNG TALAGA KAILANGAN MO ANG SOURCE FILES)
+  # ----------------------------------------------------
+
+  # Ito ay para siguruhin na kung aksidenteng ma-access ang .tsx files,
+  # ituturing ito ng server bilang JavaScript module (kung hindi maayos ang deployment)
+  AddType application/javascript .jsx .tsx
+  
+</IfModule>

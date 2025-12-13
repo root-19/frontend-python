@@ -19,7 +19,7 @@ export default function App() {
       return
     }
     authAPI.me()
-      .then((resp) => {
+      .then((resp: any) => {
         const role = String(resp?.data?.role || '')
         if (role) {
           setIsAuthenticated(true)
