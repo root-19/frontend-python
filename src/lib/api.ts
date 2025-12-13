@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 
-export const API_BASE_URL = 'http://156.67.214.237:8000/api'
-export const API_SERVER_URL = 'http://156.67.214.237:8000'
+export const API_BASE_URL = 'https://fintech-limitlessstudies.limitlessstudies.com/api'
+export const API_SERVER_URL = 'https://fintech-limitlessstudies.limitlessstudies.com'
 const api = axios.create({
   baseURL: API_BASE_URL,
 })
