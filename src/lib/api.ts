@@ -7,7 +7,8 @@ const api = axios.create({
   baseURL: API_BASE_URL,
 })
 
-// Add token to requests
+
+
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -21,7 +22,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error?.response?.status === 401) {
-      // Clear session and redirect to login
+    
       try {
         localStorage.removeItem('token')
         localStorage.removeItem('role')
